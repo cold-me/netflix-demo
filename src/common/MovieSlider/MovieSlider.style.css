@@ -1,11 +1,3 @@
-.carousel-container {
-    overflow: hidden;
-    height: 46vh;
-    /* height: 55vh; */
-    width: 100%;
-    max-width: 100dvw;
-    z-index: 1;
-}
 .popular-movie-container {
     display: flex;
     flex-direction: column;
@@ -13,9 +5,18 @@
     justify-content: center;
     background-color: black;
 }
+.carousel-container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 46vh;
+    width: 100%;
+    max-width: 100dvw;
+    z-index: 1;
+}
 
 .popular-movie-text {
     font-size: clamp(1.3rem, 2vw, 3rem);
     color: whitesmoke;
-    margin-top: 1.2rem;
+    margin-top: 3rem;
 }
