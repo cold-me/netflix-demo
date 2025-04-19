@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 const AppLayout = () => {
     return (
         <div>
-            <Navbar expand='lg' className='bg-black' data-bs-theme='dark'>
+            <Navbar expand='lg' className='bg-black navbar-container' data-bs-theme='dark'>
                 <Container fluid>
                     <Navbar.Brand href='/'>
                         <img
