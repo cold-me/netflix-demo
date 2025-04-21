@@ -1,6 +1,5 @@
 .movie-card {
-    width: 90%;
-    height: 100%;
+    height: 36dvh;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -30,10 +29,35 @@
 }
 
 .movie-card-title-text {
-    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-size: clamp(1.3rem, 3vw, 2rem);
     margin-top: 1rem;
 }
 .movie-card-info-text {
-    font-size: clamp(12px, 2vw, 16px);
+    font-size: clamp(10px, 2vw, 16px);
     margin-top: 1rem;
+}
+.movie-card-overview-text {
+    font-size: clamp(10px, 2vw, 13px);
+    margin-top: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-card-badge {
+    font-size: clamp(0.5rem, 1vw, 0.8rem);
+}
+
+@media (max-width: 768px) {
+    .movie-card-title-text {
+        margin-top: 0rem;
+    }
+    .movie-card:hover {
+        transform: scale(1.05);
+    }
+    .overlay {
+        padding: 1rem;
+    }
 }

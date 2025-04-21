@@ -1,7 +1,12 @@
-.body {
-    width: 100dvw;
-    height: 100dvh;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@100..900&display=swap');
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-optical-sizing: auto;
 }
+.italic-text {
+    font-style: italic;
+}
+
 .navbar-container {
     width: 100%;
     height: 100%;
@@ -9,4 +14,11 @@
 .netflix-logo {
     width: 100px;
     height: auto;
+}
+
+.temp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: black;
 }

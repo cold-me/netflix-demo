@@ -10,14 +10,18 @@ const Banner = () => {
 
     if (isLoading) {
         return (
-            <div>
-                <Spinner animation='grow' variant='dark' />
-                <h1>Loading... </h1>
+            <div className='temp'>
+                <Spinner variant='danger' />
             </div>
         );
     }
     if (isError) {
-        return <Alert variant='danger'>{error.message}</Alert>;
+        return (
+            <div className='temp'>
+                <Alert variant='danger' />
+                <div>{error.message}</div>
+            </div>
+        );
     }
     return (
         <div
