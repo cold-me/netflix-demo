@@ -7,7 +7,23 @@
     height: 100%;
 }
 
-.movie-page-paginate {
-    margin-top: 2rem;
-    width: 80%;
+.pagination {
+    display: flex;
+    width: 100%;
+    gap: 0.25rem;
+    justify-content: center;
+    /* flex-wrap: nowrap; */
+}
+
+.pagination .page-link {
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: large;
+}
+@media (max-width: 768px) {
+    .pagination .page-link {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
 }

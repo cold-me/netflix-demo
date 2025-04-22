@@ -6,7 +6,7 @@ const AppLayout = () => {
     const navigate = useNavigate();
     const searchByKeyword = (event) => {
         event.preventDefault();
-        navigate(`/movies?q=${keyword}`);
+        navigate(`/movies?q=${keyword}&page=1`);
     };
     return (
         <div>
@@ -22,7 +22,7 @@ const AppLayout = () => {
                     <Navbar.Collapse id='navbarScroll'>
                         <Nav className='me-auto my-2 my-lg-0' style={{ maxHeight: '100px' }} navbarScroll>
                             <Nav.Link href='/'>Home</Nav.Link>
-                            <Nav.Link href='/movies'>Movies</Nav.Link>
+                            <Nav.Link href={`/movies?q=&page=1`}>Movies</Nav.Link>
                         </Nav>
                         <Form className='d-flex' onSubmit={searchByKeyword}>
                             <Form.Control

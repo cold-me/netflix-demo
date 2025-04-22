@@ -2,7 +2,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Badge } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 import './MovieCard.style.css';
 const MovieCard = ({ movie }) => {
@@ -15,20 +15,25 @@ const MovieCard = ({ movie }) => {
         });
         return genreNameList;
     };
+    const [searchKeyword, _] = useSearchParams();
+    const keyword = searchKeyword.get('q');
+    const page = searchKeyword.get('page');
     const navigate = useNavigate();
-    const goToMovieDetail = (movie) => {
-        if (!movie) return;
-        const movieGenre = showGenre(movie.genre_ids);
-        navigate(`/movies/${movie.id}`, { state: { movie, movieGenre } });
+    const goToMovieDetail = (movieId) => {
+        if (!movieId) return;
+        // const movieGenre = showGenre(movie.genre_ids);
+        navigate(`/movies/${movieId}?q=${keyword}&page=${page}`, { state: { keyword, page } });
     };
     return (
         <div
             style={{
-                backgroundImage: `url(https://media.themoviedb.org/t/p/w600_and_h900_bestv2${movie?.poster_path})`,
+                backgroundImage: movie?.poster_path
+                    ? `url(https://media.themoviedb.org/t/p/w600_and_h900_bestv2${movie?.poster_path})`
+                    : 'url(/no-image-available.png)',
             }}
             className='movie-card'
         >
-            <div className='overlay' onClick={() => goToMovieDetail(movie)}>
+            <div className='overlay' onClick={() => goToMovieDetail(movie?.id)}>
                 <h3 className='movie-card-title-text'>{movie?.title}</h3>
                 {showGenre(movie?.genre_ids).map((genre, i) => (
                     <Badge bg='primary' key={i}>
