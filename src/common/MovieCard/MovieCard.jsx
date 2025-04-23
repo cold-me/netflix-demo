@@ -21,7 +21,6 @@ const MovieCard = ({ movie }) => {
     const navigate = useNavigate();
     const goToMovieDetail = (movieId) => {
         if (!movieId) return;
-        // const movieGenre = showGenre(movie.genre_ids);
         navigate(`/movies/${movieId}?q=${keyword}&page=${page}`, { state: { keyword, page } });
     };
     return (
@@ -34,32 +33,34 @@ const MovieCard = ({ movie }) => {
             className='movie-card'
         >
             <div className='overlay' onClick={() => goToMovieDetail(movie?.id)}>
-                <h3 className='movie-card-title-text'>{movie?.title}</h3>
                 {showGenre(movie?.genre_ids).map((genre, i) => (
                     <Badge bg='primary' key={i}>
                         <div className='movie-card-badge'>{genre}</div>
                     </Badge>
                 ))}
-                <div>
-                    <div>
-                        {movie?.adult ? (
-                            <Badge bg='danger'>
-                                <div className='movie-card-badge'>18</div>
-                            </Badge>
-                        ) : (
-                            <Badge bg='warning'>
-                                <div className='movie-card-badge'>under 18</div>
-                            </Badge>
+                <span>
+                    {movie?.adult ? (
+                        <Badge bg='danger'>
+                            <div className='movie-card-badge'>18</div>
+                        </Badge>
+                    ) : (
+                        <Badge bg='warning'>
+                            <div className='movie-card-badge'>under 18</div>
+                        </Badge>
+                    )}
+                </span>
+                <h3 className='movie-card-title-text'>{movie?.title}</h3>
+                <div className='movie-card-info-text'>
+                    <div className='movie-card-rate-and-release'>
+                        {movie?.vote_average > 0 && (
+                            <div>
+                                <FontAwesomeIcon icon={faStar} style={{ color: '#FFD43B' }} />
+                                평점 : {movie?.vote_average}
+                            </div>
                         )}
+                        {movie?.release_date && <div>🎥 {movie?.release_date}</div>}
                     </div>
-                    <div className='movie-card-info-text'>
-                        <div className='d-flex gap-1'>
-                            <FontAwesomeIcon icon={faStar} style={{ color: '#FFD43B' }} />
-                            <div> {movie?.vote_average}</div>
-                            <div> 🎥 {movie?.release_date}</div>
-                        </div>
-                        <div className='movie-card-overview-text'>{movie?.overview}</div>
-                    </div>
+                    <div className='movie-card-overview-text'>{movie?.overview}</div>
                 </div>
             </div>
         </div>

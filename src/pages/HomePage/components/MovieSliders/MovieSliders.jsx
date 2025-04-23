@@ -15,8 +15,9 @@ const MovieSliders = () => {
     if (isError) {
         return (
             <div className='temp'>
-                <Alert variant='danger' />
-                <div>{error.message}</div>
+                <Alert variant='danger'>
+                    <div>{error.message}</div>
+                </Alert>
             </div>
         );
     }

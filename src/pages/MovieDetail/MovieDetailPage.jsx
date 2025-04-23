@@ -7,7 +7,7 @@ const MovieDetailPage = () => {
     const infoList = [
         { key: 'budget', unit: '$' },
         { key: 'revenue', unit: '$' },
-        { key: 'runtime', unit: 'minutes' },
+        { key: 'runtime', unit: '분' },
     ];
     const { id } = useParams();
     const { data: selectedMovie, isLoading, isError, error } = useMovieDetail(id);
@@ -41,33 +41,30 @@ const MovieDetailPage = () => {
                 </div>
             </div>
             <div className='detail-movie-info text-white'>
-                <div>
-                    <img
-                        src={
-                            selectedMovie?.poster_path
-                                ? `https://media.themoviedb.org/t/p/w300_and_h450_bestv2${selectedMovie?.poster_path}`
-                                : '/no-image-available.png'
-                        }
-                    />
-                </div>
+                <div></div>
+                <img
+                    src={
+                        selectedMovie?.poster_path
+                            ? `https://media.themoviedb.org/t/p/w300_and_h450_bestv2${selectedMovie?.poster_path}`
+                            : '/no-image-available.png'
+                    }
+                />
                 <div className='detail-movie-text'>
-                    <h1 className='detail-movie-text-title'>{selectedMovie?.title}</h1>
-                    <div style={{ fontStyle: 'italic', color: 'gray', fontSize: 'clamp(1rem, 1.3vw, 3rem)' }}>
-                        {selectedMovie?.tagline}
-                    </div>
                     <div className='detail-movie-text-genre'>
                         {selectedMovie?.genres?.map((genre) => (
-                            <Badge variant='danger'>{genre.name}</Badge>
+                            <Badge bg='danger'>{genre.name}</Badge>
                         ))}
                     </div>
-                    <div className='d-flex flex-row gap-3'>
-                        <div>✨{selectedMovie?.vote_average}</div>
+                    <h1 className='detail-movie-text-title'>{selectedMovie?.title}</h1>
+                    <div className='tagline-text'>{selectedMovie?.tagline}</div>
+                    <div className='detail-movie-vote-average-and-release'>
+                        <div>✨{selectedMovie?.vote_average} </div>
                         <div>🎥 {selectedMovie?.release_date}</div>
                     </div>
                     {selectedMovie?.overview && (
                         <div>
                             <div className='hr' />
-                            {selectedMovie?.overview}
+                            <div className='detail-movie-overview'>{selectedMovie?.overview}</div>
                             <div className='hr' />
                         </div>
                     )}
@@ -76,7 +73,7 @@ const MovieDetailPage = () => {
                         <span className='detail-movie-badge'>
                             {selectedMovie[item.key] !== 0 && (
                                 <div>
-                                    <Badge bg='danger' style={{ marginRight: '0.5rem' }}>
+                                    <Badge bg='secondary' style={{ marginRight: '0.5rem' }}>
                                         {item.key}
                                     </Badge>
                                     <span>

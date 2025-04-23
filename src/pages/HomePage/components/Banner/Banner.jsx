@@ -18,8 +18,9 @@ const Banner = () => {
     if (isError) {
         return (
             <div className='temp'>
-                <Alert variant='danger' />
-                <div>{error.message}</div>
+                <Alert variant='danger'>
+                    <div>{error.message}</div>
+                </Alert>
             </div>
         );
     }
@@ -32,7 +33,7 @@ const Banner = () => {
         >
             <div className='text-white banner-text-area'>
                 <h1 className='banner-title-text'>{data?.results[0].title}</h1>
-                <div className='banner-overview-text'>{data?.results[0].overview}</div>
+                <p className='banner-overview-text noto-sans-kr-300'>{data?.results[0].overview}</p>
             </div>
         </div>
     );
