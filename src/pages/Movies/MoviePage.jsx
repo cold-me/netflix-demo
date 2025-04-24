@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Alert, Col, Container, Row, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useSearchParams } from 'react-router-dom';
 import MovieCard from '../../common/MovieCard/MovieCard';
+import { useMoviesByCategoryQuery } from '../../hooks/useMoviesByCategory';
+import { useMoviesByGenreQuery } from '../../hooks/useMoviesByGenre';
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie';
 import Filter from './components/Filter/Filter';
 import './MoviePage.style.css';
@@ -10,14 +12,15 @@ import './MoviePage.style.css';
 const MoviePage = () => {
     const [query, setQuery] = useSearchParams();
     const keyword = query.get('q') || '';
-    const page = Number(query.get('page')) || 1;
-    // const sorting = query.get('sort_by') || '';
+    const page = query.get('page') || '1';
+    const sorting = query.get('sort_by') || '';
+    const genre = query.get('with_genres') || '';
     const searchResult = useSearchMovieQuery({ keyword, page });
-    // const discoverResult = useDiscoverMoviesQuery({ sorting, page });
-    // const { data, isLoading, isError, error } = keyword ? discoverResult : searchResult;
-    const { data, isLoading, isError, error } = searchResult;
+    const categoryResult = useMoviesByCategoryQuery({ sorting, page });
+    const genreResult = useMoviesByGenreQuery({ genre, page });
+    const resultData = keyword ? searchResult : genre ? genreResult : categoryResult;
+    const { data, isLoading, isError, error } = resultData;
     const handlePageClick = ({ selected }) => setQuery({ q: keyword, page: selected + 1 });
-    useEffect(() => {}, [page, keyword]);
 
     if (isLoading) {
         return (
@@ -36,21 +39,22 @@ const MoviePage = () => {
                 </Alert>
             </div>
         );
+
     return (
         <div className='movie-page-container'>
-            {data?.results?.length > 0 ? (
-                <Container>
-                    <Row>
-                        <Col lg={4} xs={12}>
-                            <div className='movie-page-filter-container'>
-                                <Filter>카테고리별</Filter>
-                                <Filter>장르별</Filter>
-                            </div>
-                        </Col>
-                        <Col lg={8} xs={12}>
+            <Container>
+                <Row>
+                    <Col lg={3} xs={12}>
+                        <div className='movie-page-filter-container'>
+                            <Filter>카테고리별</Filter>
+                            <Filter>장르별</Filter>
+                        </div>
+                    </Col>
+                    {data?.results?.length > 0 ? (
+                        <Col lg={12} xs={12}>
                             <Row>
                                 {data.results.map((movie, i) => (
-                                    <Col key={i} lg={4} xs={6} md={4} style={{ height: '36dvh' }}>
+                                    <Col key={i} lg={3} xs={6} style={{ height: '36dvh' }}>
                                         <MovieCard movie={movie} />
                                     </Col>
                                 ))}
@@ -60,7 +64,7 @@ const MoviePage = () => {
                                 onPageChange={handlePageClick}
                                 pageRangeDisplayed={3}
                                 marginPagesDisplayed={2}
-                                pageCount={data?.total_pages > 500 ? 500 : data?.total_pages - 1} // total page
+                                pageCount={data?.total_pages > 500 ? 500 : data?.total_pages} // total page
                                 previousLabel='previous'
                                 pageClassName='page-item'
                                 pageLinkClassName='page-link'
@@ -77,11 +81,11 @@ const MoviePage = () => {
                                 forcePage={page - 1}
                             />
                         </Col>
-                    </Row>
-                </Container>
-            ) : (
-                <div className='no-search'>찾으시는 영화가 없습니다.</div>
-            )}
+                    ) : (
+                        <div className='no-search'>찾으시는 영화가 없습니다.</div>
+                    )}
+                </Row>
+            </Container>
         </div>
     );
 };

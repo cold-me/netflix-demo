@@ -24,7 +24,7 @@ const AppLayout = () => {
                         <Nav className='me-auto my-2 my-lg-0' style={{ maxHeight: '100px' }} navbarScroll>
                             <Nav.Link href='/'>Home</Nav.Link>
                             {/* <Nav.Link href={`/movies?q=&page=1&sort_by=`}>Movies</Nav.Link> */}
-                            <Nav.Link href={`/movies?q=&page=1`}>Movies</Nav.Link>
+                            <Nav.Link href={`/movies?q=&page=1&sort_by=popularity.desc`}>Movies</Nav.Link>
                         </Nav>
                         <Form className='d-flex' onSubmit={searchByKeyword}>
                             <Form.Control

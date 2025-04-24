@@ -6,7 +6,6 @@
     background-repeat: no-repeat;
     cursor: pointer;
     transition: 0.5s;
-    border-radius: 2rem;
 }
 .overlay {
     height: 36dvh;
@@ -47,8 +46,7 @@
 .movie-card-rate-and-release {
     display: flex;
     flex-direction: row;
-    font-size: clamp(0.6rem, 1vw, 1rem);
-
+    font-size: clamp(0.6rem, 0.7vw, 1rem);
     align-items: center;
     justify-content: space-between;
     max-height: 6dvh;
