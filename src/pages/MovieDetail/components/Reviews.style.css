@@ -41,6 +41,7 @@
 .review-author {
     font-size: clamp(1rem, 1.5vw, 2rem);
     color: orange;
+    font-weight: 400;
 }
 
 .review-created-at {

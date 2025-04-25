@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     cursor: pointer;
     transition: 0.5s;
+    border-radius: 10%;
 }
 .overlay {
     height: 36dvh;
@@ -34,7 +35,7 @@
     max-height: 6dvh;
 }
 .movie-card-title-text {
-    font-size: clamp(1rem, 1.5vw, 1.8rem);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
     margin-top: 1rem;
     max-height: 12dvh;
 }

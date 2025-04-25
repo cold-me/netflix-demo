@@ -34,17 +34,17 @@ const MovieCard = ({ movie }) => {
         >
             <div className='overlay' onClick={() => goToMovieDetail(movie?.id)}>
                 {showGenre(movie?.genre_ids).map((genre, i) => (
-                    <Badge bg='primary' key={i}>
+                    <Badge bg='primary' pill key={i}>
                         <div className='movie-card-badge'>{genre}</div>
                     </Badge>
                 ))}
                 <span>
                     {movie?.adult ? (
-                        <Badge bg='danger'>
+                        <Badge pill bg='danger'>
                             <div className='movie-card-badge'>18</div>
                         </Badge>
                     ) : (
-                        <Badge bg='warning'>
+                        <Badge pill bg='warning'>
                             <div className='movie-card-badge'>under 18</div>
                         </Badge>
                     )}
@@ -55,7 +55,7 @@ const MovieCard = ({ movie }) => {
                         {movie?.vote_average > 0 && (
                             <div>
                                 <FontAwesomeIcon icon={faStar} style={{ color: '#FFD43B' }} />
-                                평점 : {movie?.vote_average}
+                                평점 : {movie?.vote_average.toFixed(1)}
                             </div>
                         )}
                         {movie?.release_date && <div>🎥 {movie?.release_date}</div>}
